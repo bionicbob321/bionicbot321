@@ -91,6 +91,10 @@ client.on("message", function(message) { //sets event listener for messages sent
             };
         break;
         case "annoy":
+            if (message.mentions.users.first() == null) {
+                sendMessage("you must mention someone to annoy them");
+                return;
+            };
             let channel = message.channel;
             let annoyUser = message.mentions.users.first();
             annoyUser = annoyUser.id;
