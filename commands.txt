@@ -1,0 +1,19 @@
+ping: confirms the bot is working properly
+sum: adds two numbers together
+    EG: ?sum 45 17
+69: NICE
+random: generates a random number between 1 and 10, or two numbers you specify
+    EG: ?random
+    EG: ?random 4 18
+annoyme: Pings you 10 times
+annoy: pings the first user you mention 10 times
+    EG: ?ping @bendy
+setup: creates a settings folder for your server. Must be run by an administrator
+help: displays a list of all commands and what they do
+changeprefix: Changes the prefix used for commands on your server. Must be run by an administrator
+    EG: ?prefix !
+revertprefix: Reverts the servers prefix to default. Must be run by an administrator
+insult: For when someone really pisses you off
+    EG: ?insult @bendy
+voteout: when the impostor is sus 😳
+    EG: ?voteout @bendy
