@@ -130,9 +130,9 @@ client.on("message", function(message) { //sets event listener for messages sent
                 sendMessage("Only administrators can use this command");
             }
         break;
-        default:
-            sendMessage(`That command is not recognised. Run the "help" command to see all availible commands`);
-        break;
+        //default:
+            //sendMessage(`That command is not recognised. Run the "help" command to see all availible commands`);
+       //break;
         case "insult":
             if (message.mentions.users.first() == null) {
                 sendMessage("you must mention someone to insult them");
