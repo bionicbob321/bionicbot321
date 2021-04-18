@@ -9,7 +9,7 @@ const susASCII1 = fs.readFileSync("imposter1.txt").toString(`utf-8`);
 const susASCII2 = fs.readFileSync("imposter2.txt").toString(`utf-8`);
 
 const client = new Discord.Client(); //starts client
-client.login(config.BOT_TOKEN); //grabs token from config.json and logs in
+client.login(config.BOT_TOKEN); //grabs token from config.json and logs in 
 
 client.on("ready", function(ready) { //runs the following code when the bot is fully logged in and ready
     client.user.setActivity("?help", { //sets activity status
@@ -136,7 +136,7 @@ client.on("message", function(message) { //sets event listener for messages sent
         break;
         //default:
             //sendMessage(`That command is not recognised. Run the "help" command to see all availible commands`);
-       //break;
+        //break;
         case "insult":
             if (message.mentions.users.first() == null) {
                 sendMessage("you must mention someone to insult them");
