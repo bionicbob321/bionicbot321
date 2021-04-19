@@ -8,3 +8,10 @@ The bot token in config.json is deliberately obscured. If you are forking this c
 You can add the bot to your server using this link: https://discord.com/api/oauth2/authorize?client_id=759644058347241472&permissions=0&scope=bot
 
 The bot is currently hosted on a VPS server from vultr
+
+Modules currently used:
+- XMLHttpRequest
+- fs
+- discord.js
+- @discordjs/opus
+- ffmpeg-static
