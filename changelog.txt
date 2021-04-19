@@ -1,0 +1,24 @@
+UPDATE 2.0.0 (19/04/2021):
+- Added the "420" command
+- Added the "meme" command
+- Added the "wholesome" command
+- Added the "changelog" command
+- Added the "sourcecode" command
+- Added a response if the user is not an administrator when running the "setup" command
+- Made several efficiency changes, which should hopefully make the bot respond sooner
+- Improved text formatting for the "help" command
+- Made a changelog 
+- Made source code public at https://github.com/bionicbob321/bionicbot321
+
+UPDATE 1.1.2:
+- Added "voteout" command
+- Added more insults for the "insult" command
+- Fixed a bug with the "insult" command that caused it to always choose the same insult.
+- Made several efficiency changes, which should hopefully make the bot respons sooner
+
+UPDATE 1.1.1 (17/04/2021):
+- Fixed a few bugs that caused unintended behaviour
+
+UPDATE 1.0.0 (15/04/2021):
+- Bot released for the public.
+- Bot officially out of Alpha stage.
