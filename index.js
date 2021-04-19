@@ -18,25 +18,21 @@ client.on("ready", function(ready) { //runs the following code when the bot is f
     console.log("Bot is ready");
 });
 
-const database = JSON.parse(fs.readFileSync("database.json"));//grabs database from file
+const database = JSON.parse(fs.readFileSync("database.json"));
 function save() {
-    let backup = JSON.stringify(database); //you cant save an instance of an object (aka databse). You must convert it to JSON first
-    setTimeout(function(){ //runs this code every 5 minutes.
-         fs.writeFile("database.json", backup, function writeJSON(err) { //writes the database var to database.json
+    let backup = JSON.stringify(database);
+    setTimeout(function(){
+        fs.writeFile("database.json", backup, function writeJSON(err) {
             if (err) {
                 console.log(`Couldnt complete backup at ${Date.now()}`);
             } else {
-                console.log(`Succesfully completed backup at ${Date.now()}`);
-            } 
+                console.log(`Successfully completed backup at ${Date.now()}`)
+            }
         });
-        
-    }, 360000); //5 minutes
-    let a = 0
-    if (a = 0) {
-        save(); //reruns the code after its done, restarting the timer until next backup.
-    }
+        save()
+    }, 360000);
 };
-save(); //runs function for the first time
+save();
 
 client.on("message", function(message) { //sets event listener for messages sent in a server    
     if (message.author.bot) return; //checks if user is a bot, and returns nothing if true
@@ -58,6 +54,18 @@ client.on("message", function(message) { //sets event listener for messages sent
         if (content = undefined) return;
         message.channel.send(messageContent);
     };
+
+    function mention() {
+        let mention = message.mentions.users.first()
+        if (mention == null) return null;
+        return mention;
+    }
+
+    function isAdmin() {
+        let isAdmin = message.member.hasPermission("ADMINISTRATOR")
+        if (isAdmin == true) return true;
+        return false;
+    }
 
     const commandBody = message.content.slice((database[guild].prefix).length);
     const args = commandBody.split(` `);
@@ -91,13 +99,12 @@ client.on("message", function(message) { //sets event listener for messages sent
             };
         break;
         case "annoy":
-            if (message.mentions.users.first() == null) {
+            if (mention() == null) {
                 sendMessage("you must mention someone to annoy them");
                 return;
             };
             let channel = message.channel;
-            let annoyUser = message.mentions.users.first();
-            annoyUser = annoyUser.id;
+            let annoyUser = mention().id;
             let I;
             for (I=0; I < 10; I++) {
                 channel.send("<@" + annoyUser + ">");
@@ -107,7 +114,7 @@ client.on("message", function(message) { //sets event listener for messages sent
             sendMessage(`**If I was just added to your server, please get an admin to run the "setup" command**\n\n${commandsDesc}`);
         break;
         case "setup":
-            if (message.member.hasPermission("ADMINISTRATOR")) {
+            if (isAdmin()) {
                 if (database.hasOwnProperty(guild)) {
                     sendMessage("Setup has already been completed")
                     return;
@@ -120,7 +127,7 @@ client.on("message", function(message) { //sets event listener for messages sent
             } else return;
         break;
         case "changeprefix":
-            if (message.member.hasPermission("ADMINISTRATOR")) {
+            if (isAdmin()) {
                 database[guild]["prefix"] = args[0];
                 sendMessage("Prefix changed successfully")
             } else {
@@ -128,7 +135,7 @@ client.on("message", function(message) { //sets event listener for messages sent
             };
         break;
         case "revertprefix":
-            if (message.member.hasPermission("ADMINISTRATOR")) {
+            if (isAdmin()) {
                 database[guild]["prefix"] = database["!default"]["prefix"];
             } else {
                 sendMessage("Only administrators can use this command");
@@ -138,11 +145,11 @@ client.on("message", function(message) { //sets event listener for messages sent
             //sendMessage(`That command is not recognised. Run the "help" command to see all availible commands`);
         //break;
         case "insult":
-            if (message.mentions.users.first() == null) {
+            if (mention() == null) {
                 sendMessage("you must mention someone to insult them");
                 return;
             };
-            let insultedUser = message.mentions.users.first();
+            let insultedUser = mention();
             if (insultedUser.id === message.author.id) {
                 sendMessage("You shouldnt insult yourself.");
                 return;
@@ -151,11 +158,11 @@ client.on("message", function(message) { //sets event listener for messages sent
             sendMessage("Hey <@" + insultedUser.id + ">, " + insultsArray[insultNumber]);
         break;
         case "voteout":
-            if (message.mentions.users.first() == null) {
+            if (mention() == null) {
                 sendMessage("You must mention the sus imposter to vote them out!");
                 return;
             }
-            let susUser = message.mentions.users.first();
+            let susUser = mention();
             sendMessage(susASCII1 + `　ﾟ　　 <@${susUser.id}> was An Impostor.　 。\n` + susASCII2);
         break;
     };
