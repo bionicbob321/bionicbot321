@@ -1,19 +1,25 @@
-ping: confirms the bot is working properly
-sum: adds two numbers together
+-ping: confirms the bot is working properly
+-sum: adds two numbers together
     EG: ?sum 45 17
-69: NICE
-random: generates a random number between 1 and 10, or two numbers you specify
+-69: NICE
+-420: Smoke weed everyday
+-random: generates a random number between 1 and 10, or two numbers you specify
     EG: ?random
     EG: ?random 4 18
-annoyme: Pings you 10 times
-annoy: pings the first user you mention 10 times
-    EG: ?ping @bendy
-setup: creates a settings folder for your server. Must be run by an administrator
-help: displays a list of all commands and what they do
-changeprefix: Changes the prefix used for commands on your server. Must be run by an administrator
+-annoyme: Pings you 10 times
+-annoy: pings the first user you mention 10 times. any text written after the mention will be included in the message.
+    EG: ?annoy @bendy
+    EG: ?annoy @bendy I hope you die in a hole you useless excuse of a human being
+-setup: creates a settings folder for your server. Must be run by an administrator
+-help: displays a list of all commands and what they do
+-changeprefix: Changes the prefix used for commands on your server. Must be run by an administrator
     EG: ?prefix !
-revertprefix: Reverts the servers prefix to default. Must be run by an administrator
-insult: For when someone really pisses you off
+-revertprefix: Reverts the servers prefix to default. Must be run by an administrator
+-insult: For when someone really pisses you off
     EG: ?insult @bendy
-voteout: when the impostor is sus 😳
+-voteout: when the impostor is sus 😳
     EG: ?voteout @bendy
+-meme: posts a random meme from the top 25 posts from today on r/memes
+-wholesome: posts a random photo from the top 25 posts from today on r/wholesomememes
+-changelog: shows changelog of recent updates
+-sourcecode: shows where to view this projects source code

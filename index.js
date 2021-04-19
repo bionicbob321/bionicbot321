@@ -1,8 +1,10 @@
 const Discord = require("discord.js"); //discord.js
 const config = require("./config.json"); //config file
 const fs = require("fs"); //file system
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 const commandsDesc = fs.readFileSync("commands.txt");
+const changelog = fs.readFileSync("changelog.txt");
 const insults = fs.readFileSync("insults.txt").toString(`utf-8`);
 const insultsArray = insults.split(`&&&`);
 const susASCII1 = fs.readFileSync("imposter1.txt").toString(`utf-8`);
@@ -73,23 +75,26 @@ client.on("message", function(message) { //sets event listener for messages sent
 
     switch(command) {
         case "ping":
-            message.reply("beep boop I am working");
+            sendMessage("beep boop I am working");
         break;
         case "sum":
             const numArgs = args.map(x => parseFloat(x));
             const sum = numArgs.reduce((counter, x) => counter += x);
-            message.reply(`the sum of the arguments you provided is ${sum}!`);
+            sendMessage(`the sum of the numbers you provided is ${sum}!`);
         break;
         case "69":
-            message.reply(`<:PogU:797801524737736724> ***N I C E*** <:PogU:797801524737736724>`);
+            sendMessage(`<:PogU:797801524737736724> ***N I C E*** <:PogU:797801524737736724>`);
+        break;
+        case "420":
+            sendMessage("https://www.youtube.com/watch?v=U1ei5rwO7ZI");
         break;
         case "random":
             if (args === undefined) {
-              message.reply(Math.floor((Math.random() * 10) + 1));  
+              sendMesssage("Your random number is: " + Math.floor((Math.random() * 10) + 1));  
             } else {
                 let min = parseFloat(args[0]);
                 let max = parseFloat(args[1]);
-                message.reply(Math.floor(Math.random() * (max - min + 1) + min));//allows for mins other than 1, and more complex sets of min/max values
+                sendMessage("Your random number is: " + Math.floor(Math.random() * (max - min + 1) + min));//allows for mins other than 1, and more complex sets of min/max values
             };
         break;
         case "annoyme":
@@ -103,15 +108,18 @@ client.on("message", function(message) { //sets event listener for messages sent
                 sendMessage("you must mention someone to annoy them");
                 return;
             };
-            let channel = message.channel;
-            let annoyUser = mention().id;
-            let I;
-            for (I=0; I < 10; I++) {
-                channel.send("<@" + annoyUser + ">");
+            let tempArgs = args;
+            tempArgs.shift();
+            let joinedArgs = tempArgs.join(" ")
+            for (let I=0; I < 10; I++) {
+                sendMessage("<@" + mention().id + ">, " + joinedArgs);
             };
         break;
         case "help":
             sendMessage(`**If I was just added to your server, please get an admin to run the "setup" command**\n\n${commandsDesc}`);
+        break;
+        case "changelog":
+            sendMessage(`**You can find my source code at https://github.com/bionicbob321/bionicbot321**\n\n${changelog}`);
         break;
         case "setup":
             if (isAdmin()) {
@@ -124,7 +132,9 @@ client.on("message", function(message) { //sets event listener for messages sent
                     };
                 sendMessage("Setup is now complete. You can now change custom settings for your server.");
                 };
-            } else return;
+            } else {
+                sendMessage("you must be an administrator to use this command")
+            }
         break;
         case "changeprefix":
             if (isAdmin()) {
@@ -141,9 +151,6 @@ client.on("message", function(message) { //sets event listener for messages sent
                 sendMessage("Only administrators can use this command");
             }
         break;
-        //default:
-            //sendMessage(`That command is not recognised. Run the "help" command to see all availible commands`);
-        //break;
         case "insult":
             if (mention() == null) {
                 sendMessage("you must mention someone to insult them");
@@ -164,6 +171,33 @@ client.on("message", function(message) { //sets event listener for messages sent
             }
             let susUser = mention();
             sendMessage(susASCII1 + `　ﾟ　　 <@${susUser.id}> was An Impostor.　 。\n` + susASCII2);
+        break;
+        case "meme":
+            function sendMeme() {
+                let randInt = (Math.floor((Math.random() * 25) + 1)) - 1;
+                meme = JSON.parse(meme.responseText);
+                meme = meme["data"]["children"][randInt]["data"]; //top.json returns 25 top posts. access them via children[0] - children[24]. No need for meme[0] with top, only random
+                sendMessage(meme.title + "\n" + meme.url);
+            };
+            let meme = new XMLHttpRequest();
+            meme.addEventListener("load", sendMeme);
+            meme.open("GET", "https://www.reddit.com/r/memes/top.json"); //top.json doesnt return inside an array. dont use [0] with top.json
+            meme.send();
+        break;
+        case "wholesome":
+            function sendWholesome() {
+                let randInt = (Math.floor((Math.random() * 25) + 1)) - 1;
+                wholesome = JSON.parse(wholesome.responseText);
+                wholesome = wholesome["data"]["children"][randInt]["data"]; //top.json returns 25 top posts. access them via children[0] - children[24]. No need for meme[0] with top, only random
+                sendMessage(wholesome.title + "\n" + wholesome.url);
+            };
+            let wholesome = new XMLHttpRequest();
+            wholesome.addEventListener("load", sendWholesome);
+            wholesome.open("GET", "https://www.reddit.com/r/wholesomememes/top.json"); //top.json doesnt return inside an array. dont use [0] with top.json
+            wholesome.send();
+        break;
+        case "sourcecode":
+            sendMessage("The source code for this project can be viewed at:\nhttps://github.com/bionicbob321/bionicbot321");
         break;
     };
 });
