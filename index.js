@@ -55,13 +55,13 @@ async function redditRequest(subreddit, postNumber) { //temporarily dont allow p
         postNumber = (Math.floor((Math.random() * 25) + 1)) - 1;
     };
     let postData = result["data"]["children"][postNumber]["data"];
-    if (!postData.hasOwnProperty("selftext")) {
+    if (postData.selftext == "") {
         return (`**${postData.title}**:\n\n${postData.url}`);
     } else if (postData.hasOwnProperty("selftext")) { //only text posts have the selftext property.
         return (`**${postData.title}**:\n\n${postData.selftext}\n\n${postData.url}`);
     } else {
         return ("Unknow error. Please try again later");
-    };
+    }; 
 };
 
 function calculate(calculationPassed) {
