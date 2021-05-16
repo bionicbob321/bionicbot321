@@ -1,4 +1,12 @@
-UPDATE 2.0.0 (19/04/2021):
+UPDATE 1.3.0 (16/05/2021):
+- Fixed typos in the insults and the help page
+- Added more insults to the "insults" command
+- Added "calculate" command
+- Added "reddit" command
+- Made several code optimisations that should make the bot respond faster
+- Changed update naming system because It was stupid
+
+UPDATE 1.2.0 (19/04/2021):
 - Added the "420" command
 - Added the "meme" command
 - Added the "wholesome" command

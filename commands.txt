@@ -23,3 +23,11 @@
 -wholesome: posts a random photo from the top 25 posts from today on r/wholesomememes
 -changelog: shows changelog of recent updates
 -sourcecode: shows where to view this projects source code
+-reddit: sends a post from a subreddit of your choice
+    EG: ?reddit memes 6 
+    NOTE: number must be between 1 and 25. If left blank or outside that range a random number will be chosen
+-calculate: A calculator with all 4 operations plus power and root. Uses C - style mathematical notation.
+    EG: ?calculate 5 + 5
+    EG: ?calculate 9//2
+    NOTE: use "**" for square and "//" for root.
+    NOTE: spacing between numbers does not matter
