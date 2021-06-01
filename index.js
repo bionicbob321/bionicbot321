@@ -76,7 +76,7 @@ function calculate(calculationPassed) {
         splitCalc = calculation.split("**");
         total = parseFloat(splitCalc[0]) ** parseFloat(splitCalc[1])
         return total;
-    };
+    }; 
     if (calculation.indexOf("//") > -1) { //make else if to reduce compute load //dont do this bad idea.
         splitCalc = calculation.split("//");
         total = Math.pow(parseFloat(splitCalc[0]), 1/parseFloat(splitCalc[1]));
@@ -97,6 +97,7 @@ function calculate(calculationPassed) {
         total = parseFloat(splitCalc[0]) / parseFloat(splitCalc[1]);
         return total;
     };
+    console.log("test8"); //doesnt get down here
     if (calculation.indexOf("*" > -1)) {
         splitCalc = calculation.split("*");
         total = parseFloat(splitCalc[0]) * parseFloat(splitCalc[1]);
@@ -197,6 +198,27 @@ client.on("message", function(message) { //sets event listener for messages sent
                 message.reply(`Is this annoying?`);
             };
         break;
+        case "annoy+": //haven't even released this and I already regret making this
+        if (mention() == null) {
+            sendMessage("you must mention someone to annoy them");
+            return;
+        };
+        let tempArgsTwo = args;
+        let annoyNumber = tempArgsTwo[1]; //this will definitely need to be restricted or moved to a worker thread
+        if (annoyNumber > 9999) {sendMessage("Wow you really hate them, huh! For the sake of everyone's sanity this command is capped at 9999")};
+        tempArgsTwo.shift();
+        tempArgsTwo.shift();
+        let joinedArgsTwo = tempArgsTwo.join(" ")
+        if (joinedArgsTwo != "") {
+            for (let I=0; I < annoyNumber; I++) {
+                sendMessage("<@" + mention().id + ">, " + joinedArgsTwo);
+            };
+        } else {
+            for (let I=0; I < annoyNumber; I++) {
+                sendMessage("<@" + mention().id + ">");
+            };
+        };
+    break;
         case "annoy":
             if (mention() == null) {
                 sendMessage("you must mention someone to annoy them");

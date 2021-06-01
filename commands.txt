@@ -10,6 +10,8 @@
 -annoy: pings the first user you mention 10 times. any text written after the mention will be included in the message.
     EG: ?annoy @bendy
     EG: ?annoy @bendy I hope you die in a hole you useless excuse of a human being
+-annoyadvanced: An extension of the "annoy" command that lets you specify how many times to annoy a given user
+    EG: ?annoyadvanced @bendy 69 Die in a hole
 -setup: creates a settings folder for your server. Must be run by an administrator
 -help: displays a list of all commands and what they do
 -changeprefix: Changes the prefix used for commands on your server. Must be run by an administrator
