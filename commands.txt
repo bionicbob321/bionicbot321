@@ -1,12 +1,9 @@
 -ping: confirms the bot is working properly
--sum: adds two numbers together
-    EG: ?sum 45 17
 -69: NICE
 -420: Smoke weed everyday
 -random: generates a random number between 1 and 10, or two numbers you specify
     EG: ?random
     EG: ?random 4 18
--annoyme: Pings you 10 times
 -annoy: pings the first user you mention 10 times. any text written after the mention will be included in the message.
     EG: ?annoy @bendy
     EG: ?annoy @bendy I hope you die in a hole you useless excuse of a human being

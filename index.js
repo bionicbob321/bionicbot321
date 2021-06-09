@@ -76,36 +76,33 @@ function calculate(calculationPassed) {
         splitCalc = calculation.split("**");
         total = parseFloat(splitCalc[0]) ** parseFloat(splitCalc[1])
         return total;
-    };
-    if (calculation.indexOf("//") > -1) { //make else if to reduce compute load //dont do this bad idea.
+    }   else if (calculation.indexOf("//") > -1) { 
         splitCalc = calculation.split("//");
         total = Math.pow(parseFloat(splitCalc[0]), 1/parseFloat(splitCalc[1]));
         return total;
-    }; 
-    if (calculation.indexOf("+") > -1) {
+    } else if (calculation.indexOf("+") > -1) {
         splitCalc = calculation.split("+");
         total = parseFloat(splitCalc[0]) + parseFloat(splitCalc[1]);
         return total;
-    };
-    if (calculation.indexOf("-") > -1) {
+    } else if (calculation.indexOf("-") > -1) {
         splitCalc = calculation.split("-");
         total = parseFloat(splitCalc[0]) - parseFloat(splitCalc[1]);
         return total;
-    };
-    if (calculation.indexOf("/" > -1)) { //I have no fucking clue why but this only works if placed above the multiply section
+    } else if (calculation.indexOf("/") > -1) { // (calculation.indexOf("~" > -1)) returns -1 which is a "truthy" value, which triggers the function to run
         splitCalc = calculation.split("/");
         total = parseFloat(splitCalc[0]) / parseFloat(splitCalc[1]);
+        console.log("proc5");
         return total;
-    };
-    if (calculation.indexOf("*" > -1)) {
+    } else if (calculation.indexOf("*") > -1) {
         splitCalc = calculation.split("*");
         total = parseFloat(splitCalc[0]) * parseFloat(splitCalc[1]);
         return total;
+    } else {
+        return 'INVALID CALCULATION. Run the "calchelp" command for help.';//cannot be reached for some reason idk
     };
-    return 'INVALID CALCULATION. Do the "calchelp" command for help.';
     } catch (error) {
         console.log(error);
-        return 'INVALID CALCULATION. Do the "calchelp" command for help.';
+        return 'INVALID CALCULATION. Run the "calchelp" command for help.';
     };
 };
 
@@ -151,17 +148,35 @@ client.on("message", function(message) { //sets event listener for messages sent
         message.channel.send(messageContent, { split: true });
     };
 
-    function mention() {
-        let mention = message.mentions.users.first()
-        if (mention == null) return null;
+    function mentionUsers() {
+        let mentionUser = message.mentions.users.first()
+        if (mentionUser == null) return null;
+        return mentionUser;
+    };
+
+    function mentionRoles() {
+        let mentionRole = message.mentions.roles.first()
+        if (mentionRole != null) return mentionRole;
+        return null;
+    };
+
+    function mentionID() {
+        let mention;
+        if (message.mentions.users.first()) {
+            mention = message.mentions.users.first().id
+        } else if (message.mentions.roles.first()) {
+            mention = ("&" + message.mentions.roles.first().id);
+        } else {
+            mention = null;
+        };
         return mention;
-    }
+    };
 
     function isAdmin() {
         let isAdmin = message.member.hasPermission("ADMINISTRATOR")
         if (isAdmin == true) return true;
         return false;
-    }
+    };
 
     const commandBody = message.content.slice((database[guild].prefix).length);
     const args = commandBody.split(` `);
@@ -197,8 +212,31 @@ client.on("message", function(message) { //sets event listener for messages sent
                 message.reply(`Is this annoying?`);
             };
         break;
+        /*
+        case "annoy+": //haven't even released this and I already regret making this
+        if (mention() == null) {
+            sendMessage("you must mention someone to annoy them");
+            return;
+        };
+        let tempArgsTwo = args;
+        let annoyNumber = tempArgsTwo[1]; //this will definitely need to be restricted or moved to a worker thread
+        if (annoyNumber > 9999) {sendMessage("Wow you really hate them, huh! For the sake of everyone's sanity this command is capped at 9999")};
+        tempArgsTwo.shift();
+        tempArgsTwo.shift();
+        let joinedArgsTwo = tempArgsTwo.join(" ")
+        if (joinedArgsTwo != "") {
+            for (let I=0; I < annoyNumber; I++) {
+                sendMessage("<@" + mention().id + ">, " + joinedArgsTwo);
+            };
+        } else {
+            for (let I=0; I < annoyNumber; I++) {
+                sendMessage("<@" + mention().id + ">");
+            };
+        };
+        break;
+        */
         case "annoy":
-            if (mention() == null) {
+            if (!mentionID()) {
                 sendMessage("you must mention someone to annoy them");
                 return;
             };
@@ -207,11 +245,11 @@ client.on("message", function(message) { //sets event listener for messages sent
             let joinedArgs = tempArgs.join(" ")
             if (joinedArgs != "") {
                 for (let I=0; I < 10; I++) {
-                    sendMessage("<@" + mention().id + ">, " + joinedArgs);
+                    sendMessage("<@" + mentionID() + ">, " + joinedArgs);
                 };
             } else {
                 for (let I=0; I < 10; I++) {
-                    sendMessage("<@" + mention().id + ">");
+                    sendMessage("<@" + mentionID() + ">");
                 };
             };
         break;
@@ -252,25 +290,25 @@ client.on("message", function(message) { //sets event listener for messages sent
             }
         break;
         case "insult":
-            if (mention() == null) {
+            if (!mentionID()) {
                 sendMessage("you must mention someone to insult them");
                 return;
             };
-            let insultedUser = mention();
+            let insultedUser = mentionID();
             if (insultedUser.id === message.author.id) {
                 sendMessage("You shouldnt insult yourself.");
                 return;
             }
             let insultNumber = Math.floor((Math.random() * insultsArray.length) + 1) - 1;
-            sendMessage("Hey <@" + insultedUser.id + ">, " + insultsArray[insultNumber]);
+            sendMessage("Hey <@" + insultedUser + ">, " + insultsArray[insultNumber]);
         break;
         case "voteout":
-            if (mention() == null) {
+            if (!mentionID()) {
                 sendMessage("You must mention the sus imposter to vote them out!");
                 return;
             }
-            let susUser = mention();
-            sendMessage(susASCII1 + `　ﾟ　　 <@${susUser.id}> was An Impostor.　 。\n` + susASCII2);
+            let susUser = mentionID();
+            sendMessage(susASCII1 + `　ﾟ　　 <@${susUser}> was An Impostor.　 。\n` + susASCII2);
         break;
         case "meme":
             function sendMeme() {
@@ -310,7 +348,11 @@ client.on("message", function(message) { //sets event listener for messages sent
         break;
         case "calculate":
             sendMessage(calculate(commandBody.slice(10)));
-        break;
-            
+        break;            
     };
+});
+
+client.on("messageReactionAdd", (reaction, user) => {
+    if (reaction.message.author.id != client.user.id) return;
+    if (reaction.emoji.name == "🗑️") reaction.message.delete();
 });
