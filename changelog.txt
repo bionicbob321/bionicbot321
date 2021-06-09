@@ -1,3 +1,17 @@
+UPDATE 1.5.0 (09/06/2021):
+- Fixed a bug with the "calculate" command that caused any multiplication
+  to equal "NaN". Turns out I suck at spotting typos.
+- Any user can delete a recent message from the bot by reacting to the 
+  message with the :wastebasket: emoji. Only works on messages recently
+  sent by the bot. Older messages must still be cleared by a moderator
+- Removed the "annoy#" command. Will be readded when I find a way to
+  stop abuse.
+- Deprecated the "sum" command. This is now covered by the "calculate" command
+- Deprecated the "annoyme" command. This is now covered by the "annoy" command
+
+UPDATE 1.4.0 (01/06/2021):
+- Added the "annoy#" command
+
 UPDATE 1.3.0 (16/05/2021):
 - Fixed typos in the insults and the help page
 - Added more insults to the "insults" command
@@ -17,16 +31,3 @@ UPDATE 1.2.0 (19/04/2021):
 - Improved text formatting for the "help" command
 - Made a changelog 
 - Made source code public at https://github.com/bionicbob321/bionicbot321
-
-UPDATE 1.1.2:
-- Added "voteout" command
-- Added more insults for the "insult" command
-- Fixed a bug with the "insult" command that caused it to always choose the same insult.
-- Made several efficiency changes, which should hopefully make the bot respons sooner
-
-UPDATE 1.1.1 (17/04/2021):
-- Fixed a few bugs that caused unintended behaviour
-
-UPDATE 1.0.0 (15/04/2021):
-- Bot released for the public.
-- Bot officially out of Alpha stage.
